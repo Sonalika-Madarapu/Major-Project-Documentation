@@ -1,0 +1,7 @@
+pip install numpy==1.2.2
+pip install flask
+pip install pandas
+pip instal scikit-learn==1.2.2
+pip install joblib
+pip install tenserflow
+pip install --upgrade numpy scikit-learn
