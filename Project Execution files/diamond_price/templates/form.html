@@ -3,248 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diamond Price Prediction Interface</title>
-    <style>
-        /* Full-page setup */
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #121212;
-            color: #e0e0e0;
-            background-image: url('static\assets\img\dia1.jpg');
-        }
-
-        /* Background image */
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('static\assets\img\dia1.jpg');
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            filter: brightness(0.5);
-        }
-
-        /* Main content container */
-        .content {
-            text-align: center;
-            padding: 20px;
-            max-width: 800px;
-            margin-top: 20px;
-        }
-
-        /* Title style */
-        h1 {
-            color: #b39ddb;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        /* Description text */
-        p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-
-        /* Buttons container */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        /* Button styles */
-        .button {
-            padding: 12px 24px;
-            font-size: 1em;
-            color: #e0e0e0;
-            background-color: #333;
-            border: 2px solid #333;
-            border-radius: 5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        /* Hover effect for buttons */
-        .button:hover {
-            background-color: #b39ddb;
-            color: #000;
-            border-color: #b39ddb;
-        }
-
-        /* Form container */
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 50px auto 0;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 8px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
-            text-align: left;
-            display: none; /* Hide the form initially */
-        }
-
-        /* Form title */
-        .container h2 {
-            color: #b39ddb;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        /* Form labels */
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            color: #dcdcdc;
-            font-size: 1em;
-        }
-
-        /* Form inputs and selects */
-        input[type="text"], select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            background-color: #333;
-            border: 1px solid #444;
-            color: #dcdcdc;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-
-        /* Form submit button */
-        button[type="submit"] {
-            width: 100%;
-            padding: 12px;
-            font-size: 1em;
-            color: #000;
-            background-color: #b39ddb;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
-
-        /* Submit button hover effect */
-        button[type="submit"]:hover {
-            background-color: #8e8eea;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .content h1 {
-                font-size: 1.5em;
-            }
-
-            p {
-                font-size: 1em;
-            }
-
-            .button {
-                font-size: 0.9em;
-                padding: 10px 16px;
-            }
-        }
-    </style>
+    <title>Diamond Prediction Form</title>
 </head>
 <body>
-    <div class="background"></div>
-    <div class="content">
-        <h1>Analyzing Diamond Features: ANN-Based Price Estimation</h1>
-        <p>
-            In my project, "Diamond Price Predictor," I employ Artificial Neural Networks (ANNs) to predict diamond prices with precision.
-            By analyzing characteristics like shape, size, color, and clarity, the ANN model uncovers hidden patterns. This project aids 
-            gemstone enthusiasts and investors in making informed decisions within the diamond market. My goal is to achieve high accuracy 
-            in price prediction, bridging technology and gemology for valuable insights into precious stone valuation.
-        </p>
-        <div class="buttons">
-            <button class="button" onclick="showForm()">Predict</button>
-            
-        </div>
-    </div>
+    <h2>Diamond Price Prediction Form</h2>
+    <form action="{{ url_for('predict') }}" method="post">
+        <label for="carat">Carat:</label>
+        <input type="text" id="carat" name="carat" required><br><br>
 
-    <!-- Form Section -->
-    <div class="container" id="form-section">
-        <h2>Diamond Price Prediction Form</h2>
-        <form action="{{ url_for('predict') }}" method="post">
-            <label for="carat">Carat:</label>
-            <input type="text" id="carat" name="carat" required>
+        <label for="cut">Cut:</label>
+        <select id="cut" name="cut" required>
+            <option value="1">Good</option>
+            <option value="2">Ideal</option>
+            <option value="3">Premium</option>
+            <option value="4">Very Good</option>
+            <option value="0">Fair</option>
+        </select><br><br>
 
-            <label for="cut">Cut:</label>
-            <select id="cut" name="cut" required>
-                <option value="">Select</option>
-                <option value="1">Good</option>
-                <option value="2">Ideal</option>
-                <option value="3">Premium</option>
-                <option value="4">Very Good</option>
-                <option value="0">Fair</option>
-            </select>
+        <label for="color">Color:</label>
+        <select id="color" name="color" required>
+            <option value="0">D</option>
+            <option value="1">E</option>
+            <option value="2">F</option>
+            <option value="3">G</option>
+            <option value="4">H</option>
+            <option value="5">I</option>
+            <option value="6">J</option>
+        </select><br><br>
 
-            <label for="color">Color:</label>
-            <select id="color" name="color" required>
-                <option value="">Select</option>
-                <option value="0">D</option>
-                <option value="1">E</option>
-                <option value="2">F</option>
-                <option value="3">G</option>
-                <option value="4">H</option>
-                <option value="5">I</option>
-                <option value="6">J</option>
-            </select>
+        <label for="clarity">Clarity:</label>
+        <select id="clarity" name="clarity" required>
+            <option value="8">IF</option>
+            <option value="6">VVS1</option>
+            <option value="7">VVS2</option>
+            <option value="4">VS1</option>
+            <option value="5">VS2</option>
+            <option value="2">SI1</option>
+            <option value="3">SI2</option>
+            <option value="1">I1</option>
+        </select><br><br>
 
-            <label for="clarity">Clarity:</label>
-            <select id="clarity" name="clarity" required>
-                <option value="">Select</option>
-                <option value="8">IF</option>
-                <option value="6">VVS1</option>
-                <option value="7">VVS2</option>
-                <option value="4">VS1</option>
-                <option value="5">VS2</option>
-                <option value="2">SI1</option>
-                <option value="3">SI2</option>
-                <option value="1">I1</option>
-            </select>
+        <label for="depth">Depth %:</label>
+        <input type="text" id="depth" name="depth" required><br><br>
 
-            <label for="depth">Depth %:</label>
-            <input type="text" id="depth" name="depth" required>
+        <label for="table">Table %:</label>
+        <input type="text" id="table" name="table" required><br><br>
 
-            <label for="table">Table %:</label>
-            <input type="text" id="table" name="table" required>
+        <!-- Additional inputs for x, y, and z dimensions -->
+        <label for="x">Length (X):</label>
+        <input type="text" id="x" name="x" required><br><br>
 
-            <label for="x">Length (X):</label>
-            <input type="text" id="x" name="x" required>
+        <label for="y">Width (Y):</label>
+        <input type="text" id="y" name="y" required><br><br>
 
-            <label for="y">Width (Y):</label>
-            <input type="text" id="y" name="y" required>
+        <label for="z">Height (Z):</label>
+        <input type="text" id="z" name="z" required><br><br>
 
-            <label for="z">Height (Z):</label>
-            <input type="text" id="z" name="z" required>
-
-            <button type="submit">Predict</button>
-        </form>
-    </div>
-
-    <script>
-        // Function to show the form when the "Predict" button is clicked
-        function showForm() {
-            document.getElementById("form-section").style.display = "block";
-            document.getElementById("form-section").scrollIntoView({ behavior: "smooth" });
-        }
-    </script>
+        <button type="submit">Predict</button>
+    </form>
 </body>
 </html>
